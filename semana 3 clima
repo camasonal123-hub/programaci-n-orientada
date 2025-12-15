@@ -1,0 +1,65 @@
+# PROGRAMACIÓN ORIENTADA A OBJETOS (POO)
+
+class ClimaSemanal:
+    """
+    Representa la información diaria del clima para una semana.
+    Encapsula las temperaturas y los métodos para gestionarlas.
+    """
+    
+    def __init__(self):
+        # Inicialización: la lista de temperaturas está vacía al inicio (Encapsulamiento)
+        # El doble guion bajo hace a la variable "semi-privada" por convención de Python.
+        self.__temperaturas = []
+
+    def ingresar_datos(self):
+        """
+        Solicita al usuario las temperaturas diarias y las almacena en la clase.
+        """
+        self.__temperaturas = [] # Limpiar por si se llama varias veces
+        dias_semana = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"]
+        print("--- Entrada de Temperaturas Diarias (POO) ---")
+        for dia in dias_semana:
+            while True:
+                try:
+                    # Se pide la temperatura en un bucle hasta que sea un número válido
+                    temp = float(input(f"Ingrese la temperatura del {dia}: "))
+                    self.__temperaturas.append(temp)
+                    break
+                except ValueError:
+                    print("Entrada no válida. Por favor, ingrese un número para la temperatura.")
+
+    def calcular_promedio(self):
+        """
+        Calcula y retorna el promedio de las temperaturas almacenadas.
+        """
+        # Se asegura que haya datos antes de calcular
+        if not self.__temperaturas:
+            return 0
+        
+        # El cálculo es un método interno de la clase
+        suma_total = sum(self.__temperaturas)
+        promedio = suma_total / len(self.__temperaturas)
+        return promedio
+
+    def mostrar_resultados(self):
+        """
+        Muestra las temperaturas registradas y el promedio semanal.
+        """
+        promedio = self.calcular_promedio()
+        print("\n--- Resultado (POO) ---")
+        print(f"Temperaturas registradas: {self.__temperaturas}")
+        print(f"El promedio semanal de la temperatura es: {promedio:.2f} grados.")
+        
+# --- Programa Principal ---
+def main_poo():
+    # 1. Crear una instancia (objeto) de la clase
+    clima_semana = ClimaSemanal()
+    
+    # 2. Ingresar los datos usando un método de la instancia
+    clima_semana.ingresar_datos()
+    
+    # 3. Mostrar los resultados usando otro método
+    clima_semana.mostrar_resultados()
+
+if __name__ == "__main__":
+    main_poo()
